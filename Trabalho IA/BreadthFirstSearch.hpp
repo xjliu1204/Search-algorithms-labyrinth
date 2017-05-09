@@ -10,7 +10,7 @@
 #define BreadthFirstSearch_hpp
 
 #include "SearchAlgorithm.hpp"
-#include "Maze.hpp"
+#include "Structure.hpp"
 
 class BreadthFirstSearch : public SearchAlgorithm {
 private:

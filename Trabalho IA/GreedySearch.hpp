@@ -1,21 +1,22 @@
 //
-//  Irrevocable.hpp
+//  GreedySearch.hpp
 //  Trabalho IA
 //
 //  Created by Yan Mendes on 09/05/17.
 //  Copyright © 2017 Yan Mendes. All rights reserved.
 //
 
-#ifndef Irrevocable_hpp
-#define Irrevocable_hpp
+#ifndef GreedySearch_hpp
+#define GreedySearch_hpp
 
 #include "SearchAlgorithm.hpp"
+#include "Structure.hpp"
 
-class Irrevocable : public SearchAlgorithm {
+class GreedySearch : public SearchAlgorithm {
 private:
     void searchAlgorithm(Maze * m);
 public:
     string getName();
 };
 
-#endif /* Irrevocable_hpp */
+#endif /* GreedySearch_hpp */

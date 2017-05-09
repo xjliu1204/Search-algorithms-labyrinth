@@ -1,31 +1,32 @@
 //
-//  BreadthFirstSearch.cpp
+//  AStar.cpp
 //  Trabalho IA
 //
 //  Created by Yan Mendes on 09/05/17.
 //  Copyright © 2017 Yan Mendes. All rights reserved.
 //
 
-#include "BreadthFirstSearch.hpp"
+#include "AStar.hpp"
 
-string BreadthFirstSearch::getName(){
-    return "Breadth First Search";
+string AStar::getName(){
+    return "Greedy Search";
 };
 
-void BreadthFirstSearch::searchAlgorithm(Maze * m){
+void AStar::searchAlgorithm(Maze * m){
     this->success = false;
     TreeNode * currentState;
-    queue<Structure*> structureQueue;
+    vector<Structure*> structureVector;
     
     this->tree->setRoot((new State(m->getOrigin()->getId(), -1, 'N')));
     
-    structureQueue.push(new Structure(m->getOrigin(), this->tree->getRoot()));
+    structureVector.push_back(new Structure(m->getOrigin(), this->tree->getRoot()));
     
     Room * nr = nullptr, * r;
-    while(!structureQueue.empty()){
-        r = structureQueue.front()->room;
-        currentState = structureQueue.front()->state;
-        structureQueue.pop();
+    while(!structureVector.empty()){
+        //sort DESCENDING the structure vector by heuristic + edge value
+        r = structureVector.back()->room;
+        currentState = structureVector.back()->state;
+        structureVector.pop_back();
         
         if (r->getId() == m->getDestination()->getId()){
             this->success = true;
@@ -37,12 +38,11 @@ void BreadthFirstSearch::searchAlgorithm(Maze * m){
             if(nr != NULL && !nr->wasVisited()){
                 nr->visit(this->getSimetricalOp(op));
                 
-                structureQueue.push(new Structure(nr,
-                    this->tree->addState(currentState, new State(nr->getId(), r->getId(), op))));
+                structureVector.push_back(new Structure(nr,
+                                                        this->tree->addState(currentState, new State(nr->getId(), r->getId(), op))));
             }
         }
     }
     
     this->failure = !this->success;
 }
-

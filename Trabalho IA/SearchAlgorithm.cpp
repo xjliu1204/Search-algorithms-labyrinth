@@ -10,10 +10,11 @@
 
 Room * SearchAlgorithm::getFirstNonVisitedRoomByOpOrder(Room * r, char * c){
     Room * nr;
-    for(auto &&c : this->operationOrder){
-        nr = r->getRoom(c);
+    for(char op : this->operationOrder){
+        nr = r->getRoom(op);
         if(nr != NULL && !nr->wasVisited()){
-            nr->visit(this->getSimetricalOp(c));
+            nr->visit(this->getSimetricalOp(op));
+            *c = op;
             return nr;
         }
     }

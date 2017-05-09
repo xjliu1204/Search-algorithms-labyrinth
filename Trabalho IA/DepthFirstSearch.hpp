@@ -10,7 +10,7 @@
 #define DepthFirstSearch_hpp
 
 #include "SearchAlgorithm.hpp"
-#include "Maze.hpp"
+#include "Structure.hpp"
 
 class DepthFirstSearch : public SearchAlgorithm {
 private:
