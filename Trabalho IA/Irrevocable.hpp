@@ -1,23 +1,22 @@
 //
-//  Backtracking.hpp
+//  Irrevocable.hpp
 //  Trabalho IA
 //
-//  Created by Yan Mendes on 27/04/17.
+//  Created by Yan Mendes on 09/05/17.
 //  Copyright © 2017 Yan Mendes. All rights reserved.
 //
 
-#ifndef Backtracking_hpp
-#define Backtracking_hpp
+#ifndef Irrevocable_hpp
+#define Irrevocable_hpp
 
 #include "SearchAlgorithm.hpp"
 #include "Maze.hpp"
 
-class Backtracking : public SearchAlgorithm {
+class Irrevocable : public SearchAlgorithm {
 private:
     void searchAlgorithm(Maze * m);
 public:
     string getName();
 };
 
-
-#endif /* Backtracking_hpp */
+#endif /* Irrevocable_hpp */

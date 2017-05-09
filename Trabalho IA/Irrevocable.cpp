@@ -1,18 +1,18 @@
 //
-//  Backtracking.cpp
+//  Irrevocable.cpp
 //  Trabalho IA
 //
 //  Created by Yan Mendes on 09/05/17.
 //  Copyright © 2017 Yan Mendes. All rights reserved.
 //
 
-#include "Backtracking.hpp"
+#include "Irrevocable.hpp"
 
-string Backtracking::getName(){
-    return "Backtracking";
+string Irrevocable::getName(){
+    return "Irrevocable";
 };
 
-void Backtracking::searchAlgorithm(Maze * m){
+void Irrevocable::searchAlgorithm(Maze * m){
     char op;
     this->success = this->failure = false;
     
@@ -21,7 +21,7 @@ void Backtracking::searchAlgorithm(Maze * m){
     Room * r = m->getOrigin();
     Room * nr = nullptr;
     
-    while(!this->success || this->failure){
+    while(!success || failure){
         if (r->getId() == m->getDestination()->getId()){
             success = true;
             break;
@@ -31,17 +31,8 @@ void Backtracking::searchAlgorithm(Maze * m){
         
         //If a new room wasn't assigned
         if(nr == NULL){
-            //If it's the origin room
-            if(r->getId() == m->getOrigin()->getId()){
-                failure = true;
-                break;
-            }
-        
-            //Room becomes the room that presented this iterations room
-            r = r->getRoom(r->getVisitedBy());
-        
-            //Removes current state and currentState becomes the previous state
-            currentState = this->tree->removeState(currentState);
+            failure = true;
+            break;
         } else {
             //Room becomes the next room
             r = nr;
