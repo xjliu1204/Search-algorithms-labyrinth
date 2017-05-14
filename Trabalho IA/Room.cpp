@@ -8,7 +8,7 @@
 
 #include "Room.hpp"
 
-Room::Room(int id) {
+Room::Room(long long int id) {
     this->id = id;
     this->visited = false;
     this->left = this->bottom = this->right = this->top = NULL;

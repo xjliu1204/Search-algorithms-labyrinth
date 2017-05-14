@@ -38,7 +38,7 @@ void Backtracking::searchAlgorithm(Maze * m){
             }
         
             //Room becomes the room that presented this iterations room
-            r = r->getRoom(r->getVisitedBy());
+            r = r->getRoom(r->getVisitedByOp());
         
             //Removes current state and currentState becomes the previous state
             currentState = this->tree->removeState(currentState);

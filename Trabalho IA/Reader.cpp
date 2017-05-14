@@ -8,32 +8,36 @@
 
 #include "Reader.hpp"
 
-/**
- * @param A (int *) shuffled array
- *
- * @return   int    size of array
-**/
-int Reader::read(string fileName, int** A){
-    int n, i = 0;
-    string id, line;
-    fstream file;
-
-    file.open(fileName);
-
-    file >> id >> n;
-
-    *A = new int[n];
-
-    while(file >> line){
-        (*A)[i] = atoi(line.c_str());
-        ++i;
-    }
-
-    return n;
-}
-
-void Reader::parseMaze(Maze *m, string file){
+Maze * Reader::parseMaze(string file){
+    fstream inputFile;
+    inputFile.open(file);
     
+    long long int rooms, origin, destination, m, n, *matrix, currentPosition;
+    Maze * maze = new Maze(file, rooms, new Room(origin), new Room(destination));
+    
+    matrix = new long long int(m * n);
+    
+    for(long long int i = 0; i < m; ++i)
+        for(long long int j = 0; j < n; ++j)
+            matrix[i * n + j] = 1;
+    
+    for(long long int i = 0; i < m; ++i){
+        for(long long int j = 0; j < n; ++j){
+            currentPosition = i * n + j;
+            if(j != n - 1 && matrix[currentPosition + 1])
+                maze->addDoor(matrix[currentPosition], matrix[currentPosition + 1], 'R');
+            if(j != 0 && matrix[currentPosition - 1])
+                maze->addDoor(matrix[currentPosition], matrix[currentPosition - 1], 'L');
+            if(i != m - 1 && matrix[currentPosition + n])
+                maze->addDoor(matrix[currentPosition], matrix[currentPosition + n], 'B');
+            if(i != 0 && matrix[currentPosition - n])
+                maze->addDoor(matrix[currentPosition], matrix[currentPosition - n], 'T');
+        }
+    }
+    
+    inputFile.close();
+    
+    return maze;
 }
 
 vector<Maze*> Reader::parseInputFolder(string inputFolder){
@@ -41,12 +45,7 @@ vector<Maze*> Reader::parseInputFolder(string inputFolder){
     vector<Maze*> mazes;
     
     for(string file : files){
-        int origin = 1;
-        int destination = 2;
-        string instanceIdentifier = "teste";
-        Maze * m = new Maze(file, instanceIdentifier, new Room(origin), new Room(destination));
-        parseMaze(m, file);
-        mazes.push_back(m);
+        mazes.push_back(parseMaze(file));
     }
     
     return mazes;

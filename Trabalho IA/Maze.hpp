@@ -16,22 +16,23 @@
 class Maze{
 private:
     //Identifiers
-    string file, instanceIdentifier;
+    string file;
+    long long int rooms;
     
     Room * origin;
     Room * destination;
     
-    Room * getRoom(int id);
+    Room * getRoom(long long int id);
 public:
-    Maze(string file, string instanceIdentifier, Room * origin, Room * destination);
-    void addDoor(int origin, int destination, char direction);
+    Maze(string file, long long int rooms, Room * origin, Room * destination);
+    void addDoor(long long int origin, long long int destination, char direction);
     Room * getOrigin() {return this->origin;};
     Room * getDestination() {return this->destination;};
     
     //Identifiers
     string getFileName() {return file;};
-    string getInstanceIdentifier(){return this->instanceIdentifier;};
-    void getNumberOfRoomsAndDoors(unsigned long int *rooms, unsigned long int *doors);
+    long long int getRooms(){return this->rooms;};
+    unsigned long long int getNumberOfDoors();
 };
 
 #endif /* Maze_hpp */

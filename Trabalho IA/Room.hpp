@@ -9,7 +9,6 @@
 #ifndef Room_hpp
 #define Room_hpp
 
-#include <stdio.h>
 #include "Helper.hpp"
 
 using namespace std;
@@ -17,21 +16,22 @@ using namespace std;
 class Room{
 private:
     bool visited;
-    int id;
-    char visitedBy;
+    long long int id;
+    char visitedByOp;
+    long long int heuristicValue;
     
     Room * left;
     Room * bottom;
     Room * right;
     Room * top;
 public:
-    Room(int id);
-    int getId() {return this->id;};
+    Room(long long int id);
+    long long int getId() {return this->id;};
     bool wasVisited() {return this->visited;};
     void addDoor(Room * room, char direction);
-    void visit(char visitedBy) {this->visited = true; this->visitedBy = visitedBy;};
+    void visit(char visitedByOp) {this->visited = true; this->visitedByOp = visitedByOp;};
     Room * getRoom(char direction);
-    char getVisitedBy() {return this->visitedBy;};
+    char getVisitedByOp() {return this->visitedByOp;};
 };
 
 #endif /* Node_hpp */

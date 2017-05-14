@@ -18,15 +18,10 @@ void Writer::writeHeader(Maze * m)
     fstream file;
     file.open(this->outputFile, fstream::out);
     
-    unsigned long int rooms, doors;
-    
-    m->getNumberOfRoomsAndDoors(&rooms, &doors);
-    
     file << "Running search @ " << h->getCurrentTimeStamp() << endl;
     file << "########TEST PARAMS########" << endl;
-    file << "Instance identifier: " << m->getInstanceIdentifier() << endl;
-    file << "Number of rooms: " << rooms << endl;
-    file << "Number of doors: " << doors << endl;
+    file << "Number of rooms: " << m->getRooms() << endl;
+    file << "Number of doors: " << m->getNumberOfDoors() << endl;
     file << "Algorithm: " << algorithm->getName() << endl;
     
     file.close();
@@ -39,5 +34,6 @@ void Writer::writeResults(double elapsedTime, string solution, string treeHeight
     file << "Time elapsed: " << elapsedTime << " ms" << endl;
     file << "Solution: " << solution << " ms" << endl;
     file << "Tree height: " << treeHeight << " ms" << endl;
+    file << "Average expanded states: " << treeHeight << " ms" << endl;
     file.close();
 }

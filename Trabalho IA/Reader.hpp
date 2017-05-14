@@ -19,7 +19,7 @@ class Reader{
 public:
     int read(string file, int** A);
     vector<Maze*> parseInputFolder(string inputFolder);
-    void parseMaze(Maze * m, string file);
+    Maze * parseMaze(string file);
 };
 
 #endif /* Reader_hpp */

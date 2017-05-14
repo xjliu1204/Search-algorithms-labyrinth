@@ -10,21 +10,21 @@
 
 using namespace std;
 
-Maze::Maze(string file, string instanceIdentifier, Room * origin, Room * destination){
+Maze::Maze(string file, long long int rooms, Room * origin, Room * destination){
     this->file = file;
-    this->instanceIdentifier = instanceIdentifier;
+    this->rooms = rooms;
     this->origin = origin;
     this->destination = destination;
 }
 
-void Maze::addDoor(int origin, int destination, char direction){
+void Maze::addDoor(long long int origin, long long int destination, char direction){
     Room * o = getRoom(origin);
     Room * d = getRoom(destination);
     
     o->addDoor(d != NULL ? d : (new Room(destination)), direction);
 }
 
-Room * Maze::getRoom(int id){
+Room * Maze::getRoom(long long int id){
     queue<Room*> queue;
     queue.push(this->origin);
     Room * r;
@@ -48,7 +48,8 @@ Room * Maze::getRoom(int id){
     return NULL;
 }
 
-void Maze::getNumberOfRoomsAndDoors(unsigned long int *rooms, unsigned long int *doors){
+unsigned long long int Maze::getNumberOfDoors(){
+    unsigned long long int doors = 0;
     queue<Room*> queue;
     queue.push(this->origin);
     Room * r;
@@ -60,16 +61,14 @@ void Maze::getNumberOfRoomsAndDoors(unsigned long int *rooms, unsigned long int 
         if(r == NULL)
             continue;
         
-        *doors += 1;
-        
-        if(!r->wasVisited()){
-            *rooms += 1;
-            r->visit('L');
-        }
+        ++doors;
         
         queue.push(r->getRoom('L'));
         queue.push(r->getRoom('B'));
         queue.push(r->getRoom('R'));
         queue.push(r->getRoom('T'));
     }
+    
+    return doors;
 }
+

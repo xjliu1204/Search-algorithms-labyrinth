@@ -13,12 +13,12 @@
 
 class State{
 private:
-    int roomId;
-    int presentedBy;
+    long long int roomId;
+    long long int presentedBy;
     char op;
 public:
-    State(int roomId, int presentedBy, char op) {this->roomId = roomId; this->presentedBy = presentedBy; this-> op = op;};
-    int getPresentedBy() {return this->presentedBy;};
+    State(long long int roomId, long long int presentedBy, char op) {this->roomId = roomId; this->presentedBy = presentedBy; this-> op = op;};
+    long long int getPresentedBy() {return this->presentedBy;};
     char getOp() {return this->op;};
 };
 
