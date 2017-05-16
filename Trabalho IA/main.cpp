@@ -19,7 +19,6 @@
 #include "OrderedSearch.hpp"
 
 bool debug = false, dev = true;
-Reader * r = new Reader();
 string inputFolder;
 int * A;
 vector<SearchAlgorithm*> algorithms;

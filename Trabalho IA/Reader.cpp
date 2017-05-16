@@ -12,14 +12,14 @@ Maze * Reader::parseMaze(string file){
     fstream inputFile;
     inputFile.open(file);
     
-    long long int rooms, origin, destination, m, n, *matrix, currentPosition, i = 0, j = 0, room, heuristicValue;
+    long long int rooms, origin, destination, m, n, currentPosition, i = 0, j = 0, room, heuristicValue;
     string line;
     
     inputFile >> m >> n >> rooms >> origin >> destination;
     
     Maze * maze = new Maze(file, rooms, new Room(origin), new Room(destination));
     
-    matrix = new long long int(m * n);
+    vector<long long int> matrix(m * n, 0);
     
     for(i = 0; i < m; i++)
         for(int j = 0; j < n; j++)
