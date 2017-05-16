@@ -32,6 +32,9 @@ public:
     void visit(char visitedByOp) {this->visited = true; this->visitedByOp = visitedByOp;};
     Room * getRoom(char direction);
     char getVisitedByOp() {return this->visitedByOp;};
+    long long int getHeuristicValue() {return this->heuristicValue;};
+    void setHeuristicValue(long long int heuristicValue) {this->heuristicValue = heuristicValue;};
+    void resetVisit() {visited = false; visitedByOp = 'N';};
 };
 
 #endif /* Node_hpp */

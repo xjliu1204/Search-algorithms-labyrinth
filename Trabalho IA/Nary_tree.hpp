@@ -17,6 +17,8 @@ class Nary_tree{
 private:
     TreeNode * root;
     TreeNode * destroy(TreeNode * node);
+    unsigned long long int treeHeight, expandedStates;
+    stack<TreeNode*> solutionPath;
 public:
     Nary_tree() {this->root = NULL;};
     TreeNode * alreadyOpened(State * state);
@@ -24,6 +26,10 @@ public:
     TreeNode * removeState(TreeNode * state);
     void setRoot(State * state) {this->root = new TreeNode(state);};
     TreeNode * getRoot() {return this->root;};
+    string getSolution();
+    string getStatesTree(long long int destination);
+    unsigned long long int getTreeHeight();
+    double getAverageExpandedStates();
 };
 
 #endif /* Nary_tree_hpp */

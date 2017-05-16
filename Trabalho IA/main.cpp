@@ -18,7 +18,7 @@
 #include "Irrevocable.hpp"
 #include "OrderedSearch.hpp"
 
-bool debug = false;
+bool debug = false, dev = true;
 Reader * r = new Reader();
 string inputFolder;
 int * A;
@@ -122,13 +122,23 @@ int processArgs(int argc, const char * argv[]){
 int main(int argc, const char * argv[]) {
     int errors;
     
-    if((errors = processArgs(argc, argv)))
+    if(dev){
+        inputFolder = "/Users/yanmendes/Documents/Faculdades/Ufjf/Inteligência\ Artificial/Trabalho\ IA/instances";
+        algorithms.push_back(new Irrevocable());
+        algorithms.push_back(new Backtracking());
+        algorithms.push_back(new BreadthFirstSearch());
+        algorithms.push_back(new DepthFirstSearch());
+        algorithms.push_back(new OrderedSearch());
+        algorithms.push_back(new GreedySearch());
+        algorithms.push_back(new AStar());
+    } else if((errors = processArgs(argc, argv)))
         return errors;
     
     Reader * r = new Reader();
     
     cout << "- - - - - - Processing the input - - - - - - " << endl;
     vector<Maze*> mazes = r->parseInputFolder(inputFolder);
+    cout << "- - - - - - Done processing the input - - - - - - " << endl;
     
     for(vector<SearchAlgorithm*>::iterator algorithm = algorithms.begin(); algorithm != algorithms.end(); ++algorithm){
         cout << "Selected Algorithm: " << (*algorithm)->getName() << endl;
@@ -136,11 +146,12 @@ int main(int argc, const char * argv[]) {
         for(Maze * m : mazes){
             Writer * w = new Writer(m->getFileName(), (*algorithm)->getName());
             
-            w->writeHeader(m);
             clock_t before_search = clock();
             (*algorithm)->search(m);
             clock_t after_search  = clock();
-            w->writeResults(after_search - before_search, (*algorithm)->getSolution(), (*algorithm)->getTreeHeight());
+            w->writeResults(after_search - before_search, m, (*algorithm)->getTree());
+            
+            m->clear();
         }
     }
     

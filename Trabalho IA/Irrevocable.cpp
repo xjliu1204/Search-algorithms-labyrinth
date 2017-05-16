@@ -34,11 +34,11 @@ void Irrevocable::searchAlgorithm(Maze * m){
             failure = true;
             break;
         } else {
-            //Room becomes the next room
-            r = nr;
-            
             //Adds a new state and currentState becomes it
             currentState = this->tree->addState(currentState, new State(nr->getId(), r->getId(), op));
+            
+            //Room becomes the next room
+            r = nr;
         }
     }
 }

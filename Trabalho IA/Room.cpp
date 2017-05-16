@@ -12,6 +12,7 @@ Room::Room(long long int id) {
     this->id = id;
     this->visited = false;
     this->left = this->bottom = this->right = this->top = NULL;
+    this->visitedByOp = NULL;
 }
 
 void Room::addDoor(Room * room, char direction){

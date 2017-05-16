@@ -9,8 +9,12 @@
 #include "AStar.hpp"
 
 string AStar::getName(){
-    return "Greedy Search";
+    return "A* Search";
 };
+
+bool AStar::sortingFunction(Structure * a, Structure * b){
+    return a->room->getHeuristicValue() > b->room->getHeuristicValue();
+}
 
 void AStar::searchAlgorithm(Maze * m){
     this->success = false;
@@ -24,12 +28,17 @@ void AStar::searchAlgorithm(Maze * m){
     Room * nr = nullptr, * r;
     while(!structureVector.empty()){
         //sort DESCENDING the structure vector by heuristic + edge value
+        sort(structureVector.begin(), structureVector.end(), this->sortingFunction);
         r = structureVector.back()->room;
         currentState = structureVector.back()->state;
         structureVector.pop_back();
         
         if (r->getId() == m->getDestination()->getId()){
             this->success = true;
+            while(!structureVector.empty()){
+                this->tree->removeState(structureVector.back()->state);
+                structureVector.pop_back();
+            }
             break;
         }
         

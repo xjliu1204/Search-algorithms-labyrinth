@@ -15,16 +15,25 @@ Maze::Maze(string file, long long int rooms, Room * origin, Room * destination){
     this->rooms = rooms;
     this->origin = origin;
     this->destination = destination;
+    
+    this->origin->visit('L');
 }
 
 void Maze::addDoor(long long int origin, long long int destination, char direction){
     Room * o = getRoom(origin);
     Room * d = getRoom(destination);
     
-    o->addDoor(d != NULL ? d : (new Room(destination)), direction);
+    if(o == NULL)
+        o = new Room(origin);
+    
+    if(d == NULL)
+        d = new Room(destination);
+    
+    o->addDoor(d, direction);
 }
 
 Room * Maze::getRoom(long long int id){
+    vector<long long int> visited;
     queue<Room*> queue;
     queue.push(this->origin);
     Room * r;
@@ -36,13 +45,16 @@ Room * Maze::getRoom(long long int id){
         if(r == NULL)
             continue;
         
-        if(r->getId() == id)
+        else if(r->getId() == id)
             return r;
         
-        queue.push(r->getRoom('L'));
-        queue.push(r->getRoom('B'));
-        queue.push(r->getRoom('R'));
-        queue.push(r->getRoom('T'));
+        else if(find(visited.begin(), visited.end(), r->getId()) == visited.end()){
+            queue.push(r->getRoom('L'));
+            queue.push(r->getRoom('B'));
+            queue.push(r->getRoom('R'));
+            queue.push(r->getRoom('T'));
+            visited.push_back(r->getId());
+        }
     }
     
     return NULL;
@@ -50,6 +62,7 @@ Room * Maze::getRoom(long long int id){
 
 unsigned long long int Maze::getNumberOfDoors(){
     unsigned long long int doors = 0;
+    vector<long long int> visited;
     queue<Room*> queue;
     queue.push(this->origin);
     Room * r;
@@ -61,14 +74,40 @@ unsigned long long int Maze::getNumberOfDoors(){
         if(r == NULL)
             continue;
         
-        ++doors;
+        else if(find(visited.begin(), visited.end(), r->getId()) == visited.end()){
+            queue.push(r->getRoom('L'));
+            queue.push(r->getRoom('B'));
+            queue.push(r->getRoom('R'));
+            queue.push(r->getRoom('T'));
+            visited.push_back(r->getId());
+        }
         
-        queue.push(r->getRoom('L'));
-        queue.push(r->getRoom('B'));
-        queue.push(r->getRoom('R'));
-        queue.push(r->getRoom('T'));
+        ++doors;
     }
     
-    return doors;
+    return doors/2;
 }
 
+void Maze::clear(){
+    vector<long long int> visited;
+    queue<Room*> queue;
+    queue.push(this->origin);
+    Room * r;
+    
+    while(!queue.empty()){
+        r = queue.front();
+        queue.pop();
+        
+        if(r == NULL)
+            continue;
+        
+        else if(find(visited.begin(), visited.end(), r->getId()) == visited.end()){
+            r->resetVisit();
+            queue.push(r->getRoom('L'));
+            queue.push(r->getRoom('B'));
+            queue.push(r->getRoom('R'));
+            queue.push(r->getRoom('T'));
+            visited.push_back(r->getId());
+        }
+    }
+}

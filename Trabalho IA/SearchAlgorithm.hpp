@@ -20,14 +20,15 @@ protected:
     bool success, failure;
     Nary_tree * tree;
     virtual void searchAlgorithm(Maze * m) = 0;
-    char operationOrder[4] = {'L', 'B', 'R', 'T'};
+    char operationOrder[4] = {'R', 'L', 'B', 'T'};
     char getSimetricalOp(char c);
     Room * getFirstNonVisitedRoomByOpOrder(Room * r, char * c);
     
 public:
     virtual string getName() = 0;
-    virtual string getTreeHeight() {return "teste";};
-    virtual string getSolution() {return "teste";};
+    virtual Nary_tree * getTree() {return this->tree;};
+    
+    SearchAlgorithm() {this->tree = new Nary_tree();};
     
     void search(Maze * m) {
         searchAlgorithm(m);

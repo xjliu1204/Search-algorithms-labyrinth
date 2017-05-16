@@ -12,6 +12,10 @@ string GreedySearch::getName(){
     return "Greedy Search";
 };
 
+bool GreedySearch::sortingFunction(Structure * a, Structure * b){
+    return a->room->getHeuristicValue() > b->room->getHeuristicValue();
+}
+
 void GreedySearch::searchAlgorithm(Maze * m){
     this->success = false;
     TreeNode * currentState;
@@ -24,12 +28,17 @@ void GreedySearch::searchAlgorithm(Maze * m){
     Room * nr = nullptr, * r;
     while(!structureVector.empty()){
         //sort DESCENDING the structure vector by heuristic value
+        sort(structureVector.begin(), structureVector.end(), sortingFunction);
         r = structureVector.back()->room;
         currentState = structureVector.back()->state;
         structureVector.pop_back();
         
         if (r->getId() == m->getDestination()->getId()){
             this->success = true;
+            while(!structureVector.empty()){
+                this->tree->removeState(structureVector.back()->state);
+                structureVector.pop_back();
+            }
             break;
         }
         

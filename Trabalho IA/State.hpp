@@ -20,6 +20,7 @@ public:
     State(long long int roomId, long long int presentedBy, char op) {this->roomId = roomId; this->presentedBy = presentedBy; this-> op = op;};
     long long int getPresentedBy() {return this->presentedBy;};
     char getOp() {return this->op;};
+    long long int getRoomId() {return this->roomId;};
 };
 
 #endif /* State_hpp */

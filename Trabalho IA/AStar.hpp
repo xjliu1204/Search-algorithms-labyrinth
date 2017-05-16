@@ -15,6 +15,7 @@
 class AStar : public SearchAlgorithm {
 private:
     void searchAlgorithm(Maze * m);
+    static bool sortingFunction(Structure * a, Structure * b);
 public:
     string getName();
 };

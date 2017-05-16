@@ -21,13 +21,13 @@ private:
     
     Room * origin;
     Room * destination;
-    
-    Room * getRoom(long long int id);
 public:
     Maze(string file, long long int rooms, Room * origin, Room * destination);
     void addDoor(long long int origin, long long int destination, char direction);
     Room * getOrigin() {return this->origin;};
     Room * getDestination() {return this->destination;};
+    Room * getRoom(long long int id);
+    void clear();
     
     //Identifiers
     string getFileName() {return file;};

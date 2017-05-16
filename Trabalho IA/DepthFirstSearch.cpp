@@ -30,6 +30,10 @@ void DepthFirstSearch::searchAlgorithm(Maze * m){
         
         if (r->getId() == m->getDestination()->getId()){
             this->success = true;
+            while(!structureStack.empty()){
+                this->tree->removeState(structureStack.top()->state);
+                structureStack.pop();
+            }
             break;
         }
         

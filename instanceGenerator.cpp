@@ -87,11 +87,7 @@ int main(int argc, const char * argv[]) {
         }
     }
     
-    file << "M " << m << "\n";
-    file << "N " << n << "\n";
-    file << "R " << r << "\n";
-    file << "O " << M[origin] << "\n";
-    file << "D " << M[destination] << "\n" << "\n";
+    file << m << " " << n << " " << r << " " << M[origin] << " " << M[destination] << "\n";
     
     for(long long int i = 0; i < m; ++i){
         for(long long int j = 0; j < n; ++j){
@@ -99,8 +95,6 @@ int main(int argc, const char * argv[]) {
         }
         file << "\n";
     }
-    
-    file << "\n";
     
     for(long long int i = 0; i < m; ++i){
         for(long long int j = 0; j < n; ++j){

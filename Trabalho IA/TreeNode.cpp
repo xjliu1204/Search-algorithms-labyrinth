@@ -10,10 +10,8 @@
 
 using namespace std;
 
-TreeNode * TreeNode::insertChild(State * state){
-    TreeNode * node = new TreeNode(state);
-    
-    if(child == NULL)
+TreeNode * TreeNode::insertChild(TreeNode * node){
+     if(child == NULL)
         this->child = node;
     else {
         TreeNode * lastSibling = getLastSibling(this->child);

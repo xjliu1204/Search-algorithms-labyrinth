@@ -20,7 +20,7 @@ public:
     TreeNode * sibling;
     TreeNode * father;
     TreeNode(State * state) {this->state = state; this->child = NULL; this->sibling = NULL;};
-    TreeNode * insertChild(State * state);
+    TreeNode * insertChild(TreeNode * node);
     TreeNode * getLastSibling(TreeNode * node);
     TreeNode * getLastChild(TreeNode * node);
     std::vector<TreeNode*> getChildren();

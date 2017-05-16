@@ -43,11 +43,11 @@ void Backtracking::searchAlgorithm(Maze * m){
             //Removes current state and currentState becomes the previous state
             currentState = this->tree->removeState(currentState);
         } else {
-            //Room becomes the next room
-            r = nr;
-            
             //Adds a new state and currentState becomes it
             currentState = this->tree->addState(currentState, new State(nr->getId(), r->getId(), op));
+            
+            //Room becomes the next room
+            r = nr;
         }
     }
 }

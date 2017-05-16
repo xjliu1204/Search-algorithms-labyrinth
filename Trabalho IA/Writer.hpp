@@ -15,13 +15,11 @@
 #include "SearchAlgorithm.hpp"
 
 class Writer{
-    string outputFile;
-    SearchAlgorithm * algorithm;
+    string outputFile, algorithm;
     Helper * h;
 public:
     Writer(string file, string algorithm);
-    void writeHeader(Maze * m);
-    void writeResults(double elapsedTime, string solution, string treeHeight);
+    void writeResults(double elapsedTime, Maze * m, Nary_tree * tree);
 };
 
 #endif /* Writer_hpp */

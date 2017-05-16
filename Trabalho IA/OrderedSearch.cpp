@@ -31,6 +31,10 @@ void OrderedSearch::searchAlgorithm(Maze * m){
         
         if (r->getId() == m->getDestination()->getId()){
             this->success = true;
+            while(!structureVector.empty()){
+                this->tree->removeState(structureVector.back()->state);
+                structureVector.pop_back();
+            }
             break;
         }
         

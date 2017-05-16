@@ -29,6 +29,10 @@ void BreadthFirstSearch::searchAlgorithm(Maze * m){
         
         if (r->getId() == m->getDestination()->getId()){
             this->success = true;
+            while(!structureQueue.empty()){
+                this->tree->removeState(structureQueue.front()->state);
+                structureQueue.pop();
+            }
             break;
         }
         
