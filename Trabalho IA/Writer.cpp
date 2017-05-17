@@ -51,7 +51,6 @@ void Writer::writeStatistcs(string outputFile){
     
     file << "Rooms;Doors;Algorithm;Elapsed Time;Tree Height;Average Expanded States;Success\n";
     
-    std::cout.imbue(std::locale(std::cout.getloc(), new DecimalSeparator<char>(',')));
     for(Result * r : results){
         stringstream elapsed, avg;
         string e, a;
