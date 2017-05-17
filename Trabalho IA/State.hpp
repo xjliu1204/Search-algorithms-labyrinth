@@ -16,11 +16,14 @@ private:
     long long int roomId;
     long long int presentedBy;
     char op;
+    long long int cost;
 public:
-    State(long long int roomId, long long int presentedBy, char op) {this->roomId = roomId; this->presentedBy = presentedBy; this-> op = op;};
+    State(long long int roomId, long long int presentedBy, char op, long long int cost)
+        {this->roomId = roomId; this->presentedBy = presentedBy; this-> op = op; this->cost = cost;};
     long long int getPresentedBy() {return this->presentedBy;};
     char getOp() {return this->op;};
     long long int getRoomId() {return this->roomId;};
+    long long int getCost() {return this->cost;};
 };
 
 #endif /* State_hpp */

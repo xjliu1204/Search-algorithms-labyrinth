@@ -30,6 +30,7 @@ public:
     string getStatesTree(long long int destination);
     unsigned long long int getTreeHeight();
     double getAverageExpandedStates();
+    bool hasSolution();
 };
 
 #endif /* Nary_tree_hpp */

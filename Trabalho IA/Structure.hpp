@@ -15,8 +15,8 @@
 class Structure{
 public:
     Room * room;
-    TreeNode * state;
-    Structure(Room * room, TreeNode * state) {this->room = room; this->state = state;};
+    TreeNode * node;
+    Structure(Room * room, TreeNode * node) {this->room = room; this->node = node;};
 };
 
 #endif /* Structure_hpp */

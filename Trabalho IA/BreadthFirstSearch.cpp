@@ -17,22 +17,18 @@ void BreadthFirstSearch::searchAlgorithm(Maze * m){
     TreeNode * currentState;
     queue<Structure*> structureQueue;
     
-    this->tree->setRoot((new State(m->getOrigin()->getId(), -1, 'N')));
+    this->tree->setRoot((new State(m->getOrigin()->getId(), -1, 'N', 0)));
     
     structureQueue.push(new Structure(m->getOrigin(), this->tree->getRoot()));
     
     Room * nr = nullptr, * r;
     while(!structureQueue.empty()){
         r = structureQueue.front()->room;
-        currentState = structureQueue.front()->state;
+        currentState = structureQueue.front()->node;
         structureQueue.pop();
         
         if (r->getId() == m->getDestination()->getId()){
             this->success = true;
-            while(!structureQueue.empty()){
-                this->tree->removeState(structureQueue.front()->state);
-                structureQueue.pop();
-            }
             break;
         }
         
@@ -42,7 +38,7 @@ void BreadthFirstSearch::searchAlgorithm(Maze * m){
                 nr->visit(this->getSimetricalOp(op));
                 
                 structureQueue.push(new Structure(nr,
-                    this->tree->addState(currentState, new State(nr->getId(), r->getId(), op))));
+                                                        this->tree->addState(currentState, new State(nr->getId(), r->getId(), op, currentState->state->getCost() + 1))));
             }
         }
     }

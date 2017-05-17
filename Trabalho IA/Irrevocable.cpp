@@ -16,7 +16,7 @@ void Irrevocable::searchAlgorithm(Maze * m){
     char op;
     this->success = this->failure = false;
     
-    this->tree->setRoot((new State(m->getOrigin()->getId(), -1, 'N')));
+    this->tree->setRoot((new State(m->getOrigin()->getId(), -1, 'N', 0)));
     TreeNode * currentState = this->tree->getRoot();
     Room * r = m->getOrigin();
     Room * nr = nullptr;
@@ -35,7 +35,8 @@ void Irrevocable::searchAlgorithm(Maze * m){
             break;
         } else {
             //Adds a new state and currentState becomes it
-            currentState = this->tree->addState(currentState, new State(nr->getId(), r->getId(), op));
+            currentState = this->tree->addState(currentState, new State(nr->getId(), r->getId(), op,
+                                                                        currentState->state->getCost() + 1));
             
             //Room becomes the next room
             r = nr;

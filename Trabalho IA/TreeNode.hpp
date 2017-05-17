@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include "State.hpp"
-#include <vector>
+#include "Helper.hpp"
 
 class TreeNode {
 public:
@@ -23,7 +23,7 @@ public:
     TreeNode * insertChild(TreeNode * node);
     TreeNode * getLastSibling(TreeNode * node);
     TreeNode * getLastChild(TreeNode * node);
-    std::vector<TreeNode*> getChildren();
+    std::list<TreeNode*> getChildren();
 };
 
 #endif /* TreeNode_hpp */

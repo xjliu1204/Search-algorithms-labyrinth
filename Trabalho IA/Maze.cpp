@@ -110,4 +110,6 @@ void Maze::clear(){
             visited.push_back(r->getId());
         }
     }
+    
+    this->origin->visit('L');
 }

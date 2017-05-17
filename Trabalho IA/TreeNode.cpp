@@ -30,8 +30,8 @@ TreeNode * TreeNode::getLastSibling(TreeNode * node){
         return getLastSibling(node->sibling);
 }
 
-vector<TreeNode*> TreeNode::getChildren(){
-    vector<TreeNode*> children;
+list<TreeNode*> TreeNode::getChildren(){
+    list<TreeNode*> children;
     
     if(this->child != NULL){
         TreeNode* child = this->child;

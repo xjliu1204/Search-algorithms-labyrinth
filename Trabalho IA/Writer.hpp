@@ -13,13 +13,17 @@
 
 #include "Helper.hpp"
 #include "SearchAlgorithm.hpp"
+#include "Result.hpp"
 
 class Writer{
+private:
     string outputFile, algorithm;
     Helper * h;
 public:
+    Writer(string file);
     Writer(string file, string algorithm);
     void writeResults(double elapsedTime, Maze * m, Nary_tree * tree);
+    static void writeStatistcs(string outputFile);
 };
 
 #endif /* Writer_hpp */

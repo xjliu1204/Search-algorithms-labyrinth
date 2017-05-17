@@ -133,26 +133,25 @@ int main(int argc, const char * argv[]) {
     } else if((errors = processArgs(argc, argv)))
         return errors;
     
-    Reader * r = new Reader();
-    
     cout << "- - - - - - Processing the input - - - - - - " << endl;
-    vector<Maze*> mazes = r->parseInputFolder(inputFolder);
+    vector<Maze*> mazes = (new Reader())->parseInputFolder(inputFolder);
     cout << "- - - - - - Done processing the input - - - - - - " << endl;
     
     for(vector<SearchAlgorithm*>::iterator algorithm = algorithms.begin(); algorithm != algorithms.end(); ++algorithm){
         cout << "Selected Algorithm: " << (*algorithm)->getName() << endl;
         
         for(Maze * m : mazes){
-            Writer * w = new Writer(m->getFileName(), (*algorithm)->getName());
-            
             clock_t before_search = clock();
             (*algorithm)->search(m);
             clock_t after_search  = clock();
-            w->writeResults(after_search - before_search, m, (*algorithm)->getTree());
+            (new Writer(m->getFileName(), (*algorithm)->getName()))->writeResults(after_search - before_search, m, (*algorithm)->getTree());
             
             m->clear();
         }
     }
+    
+    string currentTimeStamp = (new Helper())->getCurrentTimeStamp();
+    Writer::writeStatistcs(inputFolder + "/statistics.csv");
     
     return 0;
 }

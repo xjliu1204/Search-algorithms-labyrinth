@@ -18,22 +18,18 @@ void DepthFirstSearch::searchAlgorithm(Maze * m){
     TreeNode * currentState;
     stack<Structure*> structureStack;
     
-    this->tree->setRoot((new State(m->getOrigin()->getId(), -1, 'N')));
+    this->tree->setRoot((new State(m->getOrigin()->getId(), -1, 'N', 0)));
     
     structureStack.push(new Structure(m->getOrigin(), this->tree->getRoot()));
     
     Room * nr = nullptr, * r;
     while(!structureStack.empty()){
         r = structureStack.top()->room;
-        currentState = structureStack.top()->state;
+        currentState = structureStack.top()->node;
         structureStack.pop();
-        
+
         if (r->getId() == m->getDestination()->getId()){
             this->success = true;
-            while(!structureStack.empty()){
-                this->tree->removeState(structureStack.top()->state);
-                structureStack.pop();
-            }
             break;
         }
         
@@ -42,12 +38,12 @@ void DepthFirstSearch::searchAlgorithm(Maze * m){
             nr = r->getRoom(op);
             if(nr != NULL && !nr->wasVisited()){
                 nr->visit(this->getSimetricalOp(op));
+                
                 structureStack.push(new Structure(nr,
-                    this->tree->addState(currentState, new State(nr->getId(), r->getId(), op))));
+                                                  this->tree->addState(currentState, new State(nr->getId(), r->getId(), op, currentState->state->getCost() + 1))));
             }
         }
     }
     
     this->failure = !this->success;
 }
-

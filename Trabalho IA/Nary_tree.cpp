@@ -12,7 +12,7 @@ using namespace std;
 
 TreeNode * Nary_tree::alreadyOpened(State * state){
     queue<TreeNode*> queue;
-    vector<TreeNode*> children;
+    list<TreeNode*> children;
     queue.push(this->root);
     TreeNode * n;
     
@@ -26,8 +26,8 @@ TreeNode * Nary_tree::alreadyOpened(State * state){
         children = n->getChildren();
         
         while(!children.empty()){
-            queue.push(children.back());
-            children.pop_back();
+            queue.push(children.front());
+            children.pop_front();
         }
     }
     
@@ -71,7 +71,7 @@ TreeNode * Nary_tree::destroy(TreeNode * node){
 
 string Nary_tree::getStatesTree(long long int destination){
     queue<TreeNode*> queue;
-    vector<TreeNode*> children;
+    list<TreeNode*> children;
     queue.push(this->root);
     TreeNode * n;
     
@@ -101,23 +101,27 @@ string Nary_tree::getStatesTree(long long int destination){
         
         children = n->getChildren();
         while(!children.empty()){
-            queue.push(children.back());
-            children.pop_back();
+            queue.push(children.front());
+            children.pop_front();
             ++this->expandedStates;
         }
     }
 
-    if(path.top()->state->getRoomId() == destination){
-        long long int father = 0;
-        while(!path.empty()){
-            n = path.top();
-            path.pop();
-            
-            if(n->state->getRoomId() == destination || n->state->getRoomId() == father){
-                this->solutionPath.push(n);
-                father = n->state->getPresentedBy();
+    while(!path.empty()){
+        if(path.top()->state->getRoomId() == destination){
+            long long int father = 0;
+            while(!path.empty()){
+                n = path.top();
+                path.pop();
+        
+                if(n->state->getRoomId() == destination || n->state->getRoomId() == father){
+                    this->solutionPath.push(n);
+                    father = n->state->getPresentedBy();
+                }
             }
+            break;
         }
+        path.pop();
     }
     
     return statesTree.str();
@@ -139,6 +143,8 @@ string Nary_tree::getSolution(){
     else {
         solution << "True\n";
         
+        solution << "Solution cost: " << solutionPath.size() - 1 << "\n";
+        
         //Popping the first room
         this->solutionPath.pop();
         
@@ -153,4 +159,8 @@ string Nary_tree::getSolution(){
     }
     
     return solution.str();
+}
+
+bool Nary_tree::hasSolution(){
+    return this->solutionPath.size();
 }
