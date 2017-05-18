@@ -41,8 +41,11 @@ Maze * Reader::parseMaze(string file){
         }
     }
     
-    while(inputFile >> room >> heuristicValue)
-        maze->getRoom(room)->setHeuristicValue(heuristicValue);
+    while(inputFile >> room >> heuristicValue){
+        Room * r = maze->getRoom(room);
+        if(r != NULL)
+            r->setHeuristicValue(heuristicValue);
+    }
     
     inputFile.close();
     

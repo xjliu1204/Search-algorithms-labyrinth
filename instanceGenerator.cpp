@@ -40,7 +40,6 @@ int processArgs(int argc, const char * argv[]){
     m = atoll(argv[1]);
     n = atoll(argv[2]);
     r = atoll(argv[3]);
-    
     return 0;
 }
 
@@ -48,7 +47,7 @@ bool emptyRoom(long long int iterator, long long int room){
     if(r - room + 1 == n * m - iterator)
         return false;
     else
-        return rand() % 100 < 20;
+        return rand() % 100 < ((double) r/(m*n)) * 100 - 5;
 }
 
 long long int getManhattanDistance(long long int i, long long int j, long long int destination){
@@ -91,7 +90,7 @@ int main(int argc, const char * argv[]) {
     
     for(long long int i = 0; i < m; ++i){
         for(long long int j = 0; j < n; ++j){
-            file << M[i * n + j] << "\t";
+            file << M[i * n + j] << " ";
         }
         file << "\n";
     }
