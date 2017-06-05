@@ -38,6 +38,7 @@ using namespace std;
 
 class Helper{
 public:
+    static bool PRINT_TREE;
     int getMax(int * A, int n);
     list<string> getFilesInDirectory(string directory);
     vector<string> explode(std::string const & s, char delim);

@@ -8,6 +8,8 @@
 
 #include "Helper.hpp"
 
+bool Helper::PRINT_TREE;
+
 using namespace std;
 
 /**

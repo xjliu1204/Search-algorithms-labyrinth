@@ -15,6 +15,7 @@
 #include "BreadthFirstSearch.hpp"
 #include "DepthFirstSearch.hpp"
 #include "GreedySearch.hpp"
+#include "IDAStar.hpp"
 #include "Irrevocable.hpp"
 #include "OrderedSearch.hpp"
 
@@ -73,47 +74,35 @@ int processArgs(int argc, const char * argv[]){
         algorithms.push_back(new OrderedSearch());
         algorithms.push_back(new GreedySearch());
         algorithms.push_back(new AStar());
-//        algorithms.push_back(new AStar());
+        algorithms.push_back(new IDAStar());
     } else {
-        if(!strcmp (argv[argInd], "irrevocable")) {
-            algorithms.push_back(new Irrevocable());
-            argInd++;
-        }
-        if(!strcmp (argv[argInd], "backtracking")) {
-            algorithms.push_back(new Backtracking());
-            argInd++;
-        }
-        if(!strcmp (argv[argInd], "bfs")) {
-            algorithms.push_back(new BreadthFirstSearch());
-            argInd++;
-        }
-        if(!strcmp (argv[argInd], "dfs")) {
-            algorithms.push_back(new DepthFirstSearch());
-            argInd++;
-        }
-        if(!strcmp (argv[argInd], "ordered")) {
-            algorithms.push_back(new OrderedSearch());
-            argInd++;
-        }
-        if(!strcmp (argv[argInd], "greedy")) {
-            algorithms.push_back(new GreedySearch());
-            argInd++;
-        }
-        if(!strcmp (argv[argInd], "a*")) {
-            algorithms.push_back(new AStar());
-            argInd++;
-        }
-        if(!strcmp (argv[argInd], "ida*")) {
-//            algorithms.push_back(new AStar());
-            argInd++;
+        for(argInd = argInd; argInd < argc; ++argInd) {
+            if(!strcmp (argv[argInd], "irrevocable"))
+                algorithms.push_back(new Irrevocable());
+            else if(!strcmp (argv[argInd], "backtracking"))
+                algorithms.push_back(new Backtracking());
+            else if(!strcmp (argv[argInd], "bfs"))
+                algorithms.push_back(new BreadthFirstSearch());
+            else if(!strcmp (argv[argInd], "dfs"))
+                algorithms.push_back(new DepthFirstSearch());
+            else if(!strcmp (argv[argInd], "ordered"))
+                algorithms.push_back(new OrderedSearch());
+            else if(!strcmp (argv[argInd], "greedy"))
+                algorithms.push_back(new GreedySearch());
+            else if(!strcmp (argv[argInd], "a*"))
+                algorithms.push_back(new AStar());
+            else if(!strcmp (argv[argInd], "ida*"))
+                algorithms.push_back(new IDAStar());
+            else{
+                cout << "Invalid Algorithm!!" << endl;
+                usage();
+                return 4;
+            }
+            
         }
     }
     
-    if (argInd != argc - 1) {
-        cout << "Invalid Algorithm!!" << endl;
-        usage();
-        return 4;
-    }
+    Helper::PRINT_TREE = debug;
     
     return 0;
 }
@@ -130,6 +119,7 @@ int main(int argc, const char * argv[]) {
         algorithms.push_back(new OrderedSearch());
         algorithms.push_back(new GreedySearch());
         algorithms.push_back(new AStar());
+        algorithms.push_back(new IDAStar());
     } else if((errors = processArgs(argc, argv)))
         return errors;
     

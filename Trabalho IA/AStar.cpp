@@ -9,7 +9,7 @@
 #include "AStar.hpp"
 
 string AStar::getName(){
-    return "A* Search";
+    return "A*";
 };
 
 bool AStar::sortingFunction(Structure * a, Structure * b){

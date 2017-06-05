@@ -75,7 +75,7 @@ string Nary_tree::getStatesTree(long long int destination){
     queue.push(this->root);
     TreeNode * n;
     
-    this->treeHeight = 1;
+    this->treeHeight = 0;
     //Disconsider the root
     this->expandedStates = -1;
     

@@ -23,6 +23,7 @@ protected:
     char operationOrder[4] = {'R', 'L', 'B', 'T'};
     char getSimetricalOp(char c);
     Room * getFirstNonVisitedRoomByOpOrder(Room * r, char * c);
+    Room * getFirstNonVisitedRoomByHeuristicValue(Room * r, char * c);
     
 public:
     virtual string getName() = 0;

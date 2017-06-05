@@ -23,6 +23,7 @@ Writer::Writer(string file, string algorithm){
 
 void Writer::writeResults(double elapsedTime, Maze * m, Nary_tree * tree){
     fstream file;
+    string ptree;
     
     file.open(this->outputFile, fstream::out);
     
@@ -33,7 +34,11 @@ void Writer::writeResults(double elapsedTime, Maze * m, Nary_tree * tree){
     file << "Algorithm: " << algorithm << endl;
     
     file << "Elapsed time: " << elapsedTime << " ms" << endl;
-    file << "Tree: \n" << tree->getStatesTree(m->getDestination()->getId()) << endl;
+    
+    ptree = tree->getStatesTree(m->getDestination()->getId());
+    if(Helper::PRINT_TREE)
+        file << "Tree: \n" << ptree << endl;
+    
     file << "Tree height: " << tree->getTreeHeight() << endl;
     file << "Average expanded states: " << tree->getAverageExpandedStates() << endl;
     

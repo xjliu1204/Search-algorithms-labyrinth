@@ -37,7 +37,7 @@ void Backtracking::searchAlgorithm(Maze * m){
                 break;
             }
         
-            //Room becomes the room that presented this iterations room
+            //Room becomes the room that presented this iteration room
             r = r->getRoom(r->getVisitedByOp());
         
             //Removes current state and currentState becomes the previous state
