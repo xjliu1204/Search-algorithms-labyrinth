@@ -45,7 +45,7 @@ void AStar::searchAlgorithm(Maze * m){
         
         for(char op : this->operationOrder){
             nr = r->getRoom(op);
-            if(nr != NULL && !nr->wasVisited()){
+            if(nr != NULL && (!nr->wasVisited() || this->getTree()->cheaper(nr, currentState->state->getCost() + 1))){
                 nr->visit(this->getSimetricalOp(op));
                 
                 structureVector.push_back(new Structure(nr,

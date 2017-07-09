@@ -164,3 +164,32 @@ string Nary_tree::getSolution(){
 bool Nary_tree::hasSolution(){
     return this->solutionPath.size();
 }
+
+bool Nary_tree::cheaper(Room * r, long long int cost){
+    queue<TreeNode*> queue;
+    list<TreeNode*> children;
+    queue.push(this->root);
+    TreeNode * n;
+    
+    while(!queue.empty()){
+        n = queue.front();
+        queue.pop();
+        
+        if(n->state->getRoomId() == r->getId()){
+            if(n->state->getCost() <= cost)
+                break;
+            
+            removeState(n);
+            return true;
+        }
+        
+        children = n->getChildren();
+        
+        while(!children.empty()){
+            queue.push(children.front());
+            children.pop_front();
+        }
+    }
+    
+    return false;
+}

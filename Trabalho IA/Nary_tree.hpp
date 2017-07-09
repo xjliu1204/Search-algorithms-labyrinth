@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "TreeNode.hpp"
 #include "Helper.hpp"
+#include "Room.hpp"
 
 class Nary_tree{
 private:
@@ -31,6 +32,7 @@ public:
     unsigned long long int getTreeHeight();
     double getAverageExpandedStates();
     bool hasSolution();
+    bool cheaper(Room * r, long long int cost);
 };
 
 #endif /* Nary_tree_hpp */
