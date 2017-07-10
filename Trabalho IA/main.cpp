@@ -111,7 +111,7 @@ int main(int argc, const char * argv[]) {
     int errors;
     
     if(dev){
-        inputFolder = "/Users/yanmendes/Documents/Faculdades/Ufjf/Inteligência\ Artificial/Trabalho\ IA/instances";
+        inputFolder = "/Users/yanmendes/Documents/Faculdades/Ufjf/Inteligência\ Artificial/Trabalho\ IA/instancias";
         algorithms.push_back(new Irrevocable());
         algorithms.push_back(new Backtracking());
         algorithms.push_back(new BreadthFirstSearch());
@@ -134,7 +134,7 @@ int main(int argc, const char * argv[]) {
             clock_t before_search = clock();
             (*algorithm)->search(m);
             clock_t after_search  = clock();
-            (new Writer(m->getFileName(), (*algorithm)->getName()))->writeResults(after_search - before_search, m, (*algorithm)->getTree());
+            (new Writer(m->getFileName(), (*algorithm)->getName()))->writeResults((float) (after_search - before_search) / CLOCKS_PER_SEC, m, (*algorithm)->getTree());
             
             m->clear();
         }
